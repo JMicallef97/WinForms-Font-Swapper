@@ -101,6 +101,7 @@ There's a sample windows form project in the folder called "WFS Test Program" th
 # Notes
 
 -If a replacement font is not specified for an original font, no changes will be made to the font and no errors will occur.
+
 -Fonts WILL NOT be replaced unless you add
 ```
 Application.SetCompatibleTextRenderingDefault(true);
