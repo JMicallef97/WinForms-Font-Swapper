@@ -44,7 +44,185 @@ namespace WinForms_Font_Swapper
         // functions that let developer specify fonts to replace original fonts
         #region FONT STYLE SETTING FUNCTIONS
 
-        // can
+        // -apply new font to all styles (match size)
+        // -apply new font to range of font sizes (all fonts)
+        // -apply new font to specific font name (fonts of all sizes that contain the name)
+
+        /// <summary>
+        /// Specifies a font to be swapped with all original fonts in the forms, regardless of
+        /// the name, size, or style of an original font. The original fonts will be replaced with
+        /// a font of the original size and style but with the characters from the newFontFamily parameter.
+        /// NOTE: At least 1 form must be scanned before this function can be run.
+        /// </summary>
+        /// <param name="newFontFamily">The family of the new font.</param>
+        public static void specifyUniversalFont(FontFamily newFontFamily)
+        {
+            // ensure that programStyles dictionary is initialized
+            if (programStyles == null)
+            {
+                // throw exception since can't proceed
+                throw new Exception("No fonts available to replace! Ensure that all forms were scanned through scanFormForFonts() before calling this function.");
+            }
+
+            // specify replacement fonts for all fonts in programStyles
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // specify a replacement font that has the same size and style, but from
+                // the newFontFamily.
+                programStyles[programStyles.Keys.ElementAt(m)] =
+                    new Font(newFontFamily,
+                        programStyles.Keys.ElementAt(m).SizeInPoints,
+                        programStyles.Keys.ElementAt(m).Style);
+            }
+        }
+
+        /// <summary>
+        /// Specifies a font to be swapped with original fonts whose Size property matches sizeToReplace. The replacement 
+        /// fonts are generated from newFontFamily with the style specified in newFontStyle (if it is not set to null). 
+        /// NOTE: At least 1 form must be scanned before this function can be run.
+        /// </summary>
+        /// <param name="newFontFamily">The family of the new font.</param>
+        /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
+        /// <param name="sizeToReplace">The font size (of original fonts) that the new font is to replace.</param>
+        public static void specifyFontForSize(FontFamily newFontFamily, FontStyle? newFontStyle, float sizeToReplace)
+        {
+            // ensure that programStyles dictionary is initialized
+            if (programStyles == null)
+            {
+                // throw exception since can't proceed
+                throw new Exception("No fonts available to replace! Ensure that all forms were scanned through scanFormForFonts() before calling this function.");
+            }
+
+            // specify replacement fonts for all fonts in programStyles
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // check if original font size matches sizeToReplace
+                if (programStyles.Keys.ElementAt(m).Size == sizeToReplace)
+                {
+                    // check if new font style specified
+                    if (newFontStyle != null)
+                    {
+                        // specify a replacement font from newFontFamily and with
+                        // the style specified in newFontStyle
+                        programStyles[programStyles.Keys.ElementAt(m)] =
+                            new Font(newFontFamily,
+                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                newFontStyle.Value);
+                    }
+                    else
+                    {
+                        // specify a replacement font from newFontFamily, but with the original
+                        // font size and style
+                        programStyles[programStyles.Keys.ElementAt(m)] =
+                            new Font(newFontFamily,
+                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Style);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Specifies a font to be swapped with original fonts whose Size property is between minSizeToReplace and 
+        /// maxSizeToReplace, inclusive. The replacement fonts are generated from newFontFamily with the style specified 
+        /// in newFontStyle (if it is not set to null). NOTE: At least 1 form must be scanned before this function can be run.
+        /// </summary>
+        /// <param name="newFontFamily">The family of the new font.</param>
+        /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
+        /// <param name="minSizeToReplace">The inclusive minimum font size (of original fonts) that the new font is to replace.</param>
+        /// <param name="maxSizeToReplace">The inclusive maximum font size (of original fonts) that the new font is to replace.</param>
+        public static void specifyFontForSizeRange(FontFamily newFontFamily, FontStyle? newFontStyle,
+            float minSizeToReplace, float maxSizeToReplace)
+        {
+            // ensure that programStyles dictionary is initialized
+            if (programStyles == null)
+            {
+                // throw exception since can't proceed
+                throw new Exception("No fonts available to replace! Ensure that all forms were scanned through scanFormForFonts() before calling this function.");
+            }
+
+            // specify replacement fonts for all fonts in programStyles
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // check if original font size matches sizeToReplace
+                if (programStyles.Keys.ElementAt(m).Size >= minSizeToReplace &&
+                    programStyles.Keys.ElementAt(m).Size <= maxSizeToReplace)
+                {
+                    // check if new font style specified
+                    if (newFontStyle != null)
+                    {
+                        // specify a replacement font from newFontFamily and with
+                        // the style specified in newFontStyle
+                        programStyles[programStyles.Keys.ElementAt(m)] =
+                            new Font(newFontFamily,
+                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                newFontStyle.Value);
+                    }
+                    else
+                    {
+                        // specify a replacement font from newFontFamily, but with the original
+                        // font size and style
+                        programStyles[programStyles.Keys.ElementAt(m)] =
+                            new Font(newFontFamily,
+                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Style);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Specifies a font to be swapped with all original fonts whose name matches the parameter fontNameToReplace, regardless of
+        /// the name, size, or style of an original font. The original fonts will be replaced with a font of the original size and 
+        /// style (if newFontStyle is not set to null) but with the characters from the newFontFamily parameter.
+        /// NOTE: At least 1 form must be scanned before this function can be run.
+        /// </summary>
+        /// <param name="newFontFamily">The family of the new font.</param>
+        /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
+        /// <param name="fontNameToReplace">Original fonts with the name specified in this parameter will be replaced.</param>
+        public static void specifyFontForFontFamily(FontFamily newFontFamily, FontStyle? newFontStyle, string fontNameToReplace)
+        {
+            // ensure that programStyles dictionary is initialized
+            if (programStyles == null)
+            {
+                // throw exception since can't proceed
+                throw new Exception("No fonts available to replace! Ensure that all forms were scanned through scanFormForFonts() before calling this function.");
+            }
+
+            // ensure that fontNameToReplace isn't null or blank
+            if (fontNameToReplace == null || fontNameToReplace == "")
+            {
+                throw new Exception("No font name specified for replacement, cannot proceed.");
+            }
+
+            // specify replacement fonts for all fonts in programStyles
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // check if font name of original font matches
+                if (programStyles.Keys.ElementAt(m).Name == fontNameToReplace)
+                {
+                    // check if new font style specified
+                    if (newFontStyle != null)
+                    {
+                        // specify a replacement font from newFontFamily and with
+                        // the style specified in newFontStyle
+                        programStyles[programStyles.Keys.ElementAt(m)] =
+                            new Font(newFontFamily,
+                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                newFontStyle.Value);
+                    }
+                    else
+                    {
+                        // specify a replacement font from newFontFamily, but with the original
+                        // font size and style
+                        programStyles[programStyles.Keys.ElementAt(m)] =
+                            new Font(newFontFamily,
+                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Style);
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -65,7 +243,8 @@ namespace WinForms_Font_Swapper
                 programStyles = new Dictionary<Font, Font>();
             }
 
-            if (!programStyles.ContainsKey(enumeratedControl.Font))
+            if (!programStyles.ContainsKey(enumeratedControl.Font) &&
+                enumeratedControl.Font != null)
             {
                 // add the font to the dictionary with a null value and proceed to step 1.
                 programStyles.Add(enumeratedControl.Font, null);
