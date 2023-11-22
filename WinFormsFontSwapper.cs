@@ -13,6 +13,11 @@ namespace WinForms_Font_Swapper
     /// </summary>
     public static class WinFormsFontSwapper
     {
+        // NOTE:
+        // ***Custom fonts WILL NOT render unless you add Application.SetCompatibleTextRenderingDefault(true); to the
+        // Main function in Program.cs.***
+        // -Source: https://stackoverflow.com/a/36509042
+
         // delegates
         /// <summary>
         /// Represents a method that is used to perform some action on a control that is enumerated
@@ -226,6 +231,7 @@ namespace WinForms_Font_Swapper
 
         #endregion
 
+        // functions that are run whenever a control is enumerated when traversing a form's control tree
         #region CONTROL ENUMERATION DELEGATES
 
         /// <summary>
@@ -440,7 +446,7 @@ namespace WinForms_Font_Swapper
             #endregion
 
             // iterate through all forms, applying changes to all controls
-            for (int m = programForms.Count; m >= 0; m--)
+            for (int m = programForms.Count - 1; m >= 0; m--)
             {
                 //  check if form is null (for example, original item disposed of)
                 if (programForms[m] == null)
@@ -461,7 +467,8 @@ namespace WinForms_Font_Swapper
         /// Enumerates a form's control tree by traversing it with a stack. The parameter controlModifierDelegate represents
         /// a function that is run on every control that is enumerated.
         /// </summary>
-        /// <param name="controlModifierDelegate"></param>
+        /// <param name="formToEnumerate">The form whose control tree will be enumerated.</param>
+        /// <param name="controlModifierDelegate">Function that will be run whenever a control is enumerated from the formToEnumerate's control tree.</param>
         private static void enumerateFormControlTree(Form formToEnumerate, ControlEnumerationDelegate controlModifierDelegate)
         {
             // ensure that formToEnumerate and controlModifierDelegate are not null
@@ -489,14 +496,8 @@ namespace WinForms_Font_Swapper
             // -used to store the control that was most recently popped off the formControlStack
             Control lastPoppedControl = null;
 
-            /*======PROCEDURE TO ENUMERATE CONTROLS======
-                 * 1. Add form to stack, to start it.
-                 * 2. While stack is not empty:
-                 *      1. Pop item off stack, store in lastPoppedControl
-                 *      2. Check if item has children; if it does, push them all onto stack.
-                 *      3. Run the controlModifierDelegate, passing lastPoppedControl and
-                 *         formControlStack into the function as parameters.
-                 */
+            // add form to stack to start process
+            formControlStack.Push(formToEnumerate);
 
             // continue until stack is empty
             while (formControlStack.Count > 0)
