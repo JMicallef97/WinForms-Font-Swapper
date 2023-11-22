@@ -15,9 +15,10 @@ few lines of code.
 WinFormsFontSwapper.scanFormForFonts([your form name here]);
 ```
 
-2. Specify the fonts you want to change, using the following methods:
+2. Specify the fonts you want to change. You can specify replacement fonts by the following methods: Replace all fonts,
+replace fonts by size, replace fonts by size range, or replace fonts by name. Examples are below.
 
-REPLACE ALL (Universal Font)
+**REPLACE ALL (Universal Font)**
 ```
 // Specify a universal font (replace all fonts with this font).
 
@@ -29,7 +30,7 @@ WinFormsFontSwapper.specifyUniversalFont(
 
 ```
 
-REPLACE BY SIZE
+**REPLACE BY SIZE**
 ```
 // -Only replace original fonts that match a particular size
 // (specified in the 3rd parameter). 
@@ -48,7 +49,7 @@ WinFormsFontSwapper.specifyFontForSize(
 
 ```
 
-REPLACE BY SIZE RANGE
+**REPLACE BY SIZE RANGE**
 ```
 // -Only replace original fonts that fall within a size range,
 // with the minimum size specified in the 3rd parameter and maximum
@@ -69,7 +70,7 @@ WinFormsFontSwapper.specifyFontForSizeRange(
 
 ```
 
-REPLACE BY FONT FAMILY NAME
+**REPLACE BY FONT FAMILY NAME**
 ```
 // -Only replace original fonts that match the font name, specified
 // in the 3rd parameter. 
