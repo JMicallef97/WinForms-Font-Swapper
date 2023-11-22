@@ -5,7 +5,7 @@ Tired of manually changing fonts all the time when trying to get the look of you
 Maybe at certain sizes the font you picked is unreadable, or maybe you can't or don't want to use default
 fonts. I've been there myself, that's why I wrote this library.
 
-WinForms Font Swapper is a C# libray that allows you to quickly change fonts across multiple windows forms with only a
+WinForms Font Swapper is a C# library that allows you to quickly change fonts across multiple windows forms with only a
 few lines of code. 
 
 # How to Use
@@ -100,10 +100,15 @@ There's a sample windows form project in the folder called "WFS Test Program" th
 
 # Notes
 
--If a replacement font is not specified for an original font, no changes will be made to the font and no errors will occur.
+1. If a replacement font is not specified for an original font, no changes will be made to the font and no errors will occur.
 
--Fonts WILL NOT be replaced unless you add
+2. Fonts WILL NOT be replaced unless you add
 ```
 Application.SetCompatibleTextRenderingDefault(true);
 ```
 to the Main() function in Program.cs.
+
+# Version & Dependency Information
+
+I created this with Visual Studio C# 2010, using .Net Framework 4, on November 22 2023. This library does not use any 
+external dependencies.
