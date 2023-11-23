@@ -41,7 +41,11 @@ WinFormsFontSwapper.specifyUniversalFont(
 **REPLACE BY SIZE**
 ```
 // -Only replace original fonts that match a particular size
-// (specified in the 3rd parameter). 
+// (specified in the 3rd parameter).
+
+// You can specify a scaling (multiplier) factor for the new fonts, by default it is set to 1.0. Values
+// larger than 1.0 result in replacement fonts being larger than original fonts, while values less than
+// 1.0 result in replacement fonts being smaller than original fonts. 
 
 // Replacement fonts will be the same size as the original font.
 
@@ -53,7 +57,8 @@ WinFormsFontSwapper.specifyUniversalFont(
 WinFormsFontSwapper.specifyFontForSize(
 	[family of the font you want to replace],
 	[Null OR new font style],
-	[Original font size to replace]);
+	[Original font size to replace],
+	[scaling factor for new font]);
 
 ```
 
@@ -63,7 +68,9 @@ WinFormsFontSwapper.specifyFontForSize(
 // with the minimum size specified in the 3rd parameter and maximum
 // size specified in the 4th parameter. The range is inclusive.
 
-// Replacement fonts will be the same size as the original font.
+// You can specify a scaling (multiplier) factor for the new fonts, by default it is set to 1.0. Values
+// larger than 1.0 result in replacement fonts being larger than original fonts, while values less than
+// 1.0 result in replacement fonts being smaller than original fonts.
 
 // -You can override the style of the original font by passing
 // a FontStyle object in the second parameter, or set it to null
@@ -74,7 +81,8 @@ WinFormsFontSwapper.specifyFontForSizeRange(
 	[family of the font you want to replace],
 	[Null OR new font style],
 	[Minimum original font size to replace],
-	[Maximum original font size to replace]);
+	[Maximum original font size to replace],
+	[scaling factor for new font]);
 
 ```
 
@@ -83,7 +91,9 @@ WinFormsFontSwapper.specifyFontForSizeRange(
 // -Only replace original fonts that match the font name, specified
 // in the 3rd parameter. 
 
-// Replacement fonts will be the same size as the original font.
+// You can specify a scaling (multiplier) factor for the new fonts, by default it is set to 1.0. Values
+// larger than 1.0 result in replacement fonts being larger than original fonts, while values less than
+// 1.0 result in replacement fonts being smaller than original fonts.
 
 // -You can override the style of the original font by passing
 // a FontStyle object in the second parameter, or set it to null
@@ -93,7 +103,8 @@ WinFormsFontSwapper.specifyFontForSizeRange(
 WinFormsFontSwapper.specifyFontForFontFamily(
 	[family of the font you want to replace],
 	[Null OR new font style],
-	[Name of original font to replace]);
+	[Name of original font to replace],
+	[scaling factor for new font]);
 
 ```
 

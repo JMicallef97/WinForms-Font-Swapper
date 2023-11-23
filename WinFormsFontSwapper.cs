@@ -115,7 +115,10 @@ namespace WinForms_Font_Swapper
         /// <param name="newFontFamily">The family of the new font.</param>
         /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
         /// <param name="sizeToReplace">The font size (of original fonts) that the new font is to replace.</param>
-        public static void specifyFontForSize(FontFamily newFontFamily, FontStyle? newFontStyle, float sizeToReplace)
+        /// <param name="newFontScalingFactor">The amount to scale the new font's size, compared to the original font size. By default it is 1.0 (no change in size). Values greater than 1.0f increase
+        /// new font size, while values that are less than 1.0f decrease new font size.</param>
+        public static void specifyFontForSize(FontFamily newFontFamily, FontStyle? newFontStyle, float sizeToReplace, 
+            float newFontScalingFactor = 1.0f)
         {
             // ensure that programStyles dictionary is initialized
             if (programStyles == null)
@@ -137,7 +140,7 @@ namespace WinForms_Font_Swapper
                         // the style specified in newFontStyle
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).Size,
+                                programStyles.Keys.ElementAt(m).Size * newFontScalingFactor,
                                 newFontStyle.Value);
                     }
                     else
@@ -146,7 +149,7 @@ namespace WinForms_Font_Swapper
                         // font size and style
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).Size,
+                                programStyles.Keys.ElementAt(m).Size * newFontScalingFactor,
                                 programStyles.Keys.ElementAt(m).Style);
                     }
                 }
@@ -163,8 +166,10 @@ namespace WinForms_Font_Swapper
         /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
         /// <param name="minSizeToReplace">The inclusive minimum font size (of original fonts) that the new font is to replace.</param>
         /// <param name="maxSizeToReplace">The inclusive maximum font size (of original fonts) that the new font is to replace.</param>
+        /// <param name="newFontScalingFactor">The amount to scale the new font's size, compared to the original font size. By default it is 1.0 (no change in size). Values greater than 1.0f increase
+        /// new font size, while values that are less than 1.0f decrease new font size.</param>
         public static void specifyFontForSizeRange(FontFamily newFontFamily, FontStyle? newFontStyle,
-            float minSizeToReplace, float maxSizeToReplace)
+            float minSizeToReplace, float maxSizeToReplace, float newFontScalingFactor = 1.0f)
         {
             // ensure that programStyles dictionary is initialized
             if (programStyles == null)
@@ -187,7 +192,7 @@ namespace WinForms_Font_Swapper
                         // the style specified in newFontStyle
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Size * newFontScalingFactor,
                                 newFontStyle.Value);
                     }
                     else
@@ -196,7 +201,7 @@ namespace WinForms_Font_Swapper
                         // font size and style
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Size * newFontScalingFactor,
                                 programStyles.Keys.ElementAt(m).Style);
                     }
                 }
@@ -213,7 +218,10 @@ namespace WinForms_Font_Swapper
         /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
         /// <param name="fontNameToReplace">Original fonts with the name specified in this parameter will be replaced. If this is blank or null,
         /// an exception will be thrown.</param>
-        public static void specifyFontForFontFamily(FontFamily newFontFamily, FontStyle? newFontStyle, string fontNameToReplace)
+        /// <param name="newFontScalingFactor">The amount to scale the new font's size, compared to the original font size. By default it is 1.0 (no change in size). Values greater than 1.0f increase
+        /// new font size, while values that are less than 1.0f decrease new font size.</param>
+        public static void specifyFontForFontFamily(FontFamily newFontFamily, FontStyle? newFontStyle, string fontNameToReplace
+            , float newFontScalingFactor = 1.0f)
         {
             // ensure that programStyles dictionary is initialized
             if (programStyles == null)
@@ -241,7 +249,7 @@ namespace WinForms_Font_Swapper
                         // the style specified in newFontStyle
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Size * newFontScalingFactor,
                                 newFontStyle.Value);
                     }
                     else
@@ -250,7 +258,7 @@ namespace WinForms_Font_Swapper
                         // font size and style
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Size * newFontScalingFactor,
                                 programStyles.Keys.ElementAt(m).Style);
                     }
                 }
@@ -268,7 +276,8 @@ namespace WinForms_Font_Swapper
         /// <param name="fontStyleToReplace">The style of the font to be replaced</param>
         /// <param name="sizeOfFontToReplace">The size of the font to be replaced.</param>
         public static void specifyFontForFont(Font replacementFont, 
-            string nameOfFontToReplace, float sizeOfFontToReplace, FontStyle fontStyleToReplace)
+            string nameOfFontToReplace, float sizeOfFontToReplace, FontStyle fontStyleToReplace
+            , float newFontScalingFactor = 1.0f)
         {
             #region ERROR CHECKING
 
