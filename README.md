@@ -178,3 +178,5 @@ I created this with Visual Studio C# 2010, using .Net Framework 4, on November 2
 # Licensing
 
 Both the library and test program are licensed under the MIT license. The replacement font used in the test program is called "ShareTechMono_Regular", and a copy of its license (the SIL open font license) is located at "WFS Test Program - Source Code And Program\Licenses\". If you use this library in a project I'd love to hear about it!
+
+Please make sure that you have permission (e.g., a license or written permission) from the font creator before you use their fonts in your program.
