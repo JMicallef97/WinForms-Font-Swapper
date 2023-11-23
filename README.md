@@ -100,6 +100,68 @@ There's a sample windows form project in the folder called "WFS Test Program - S
 If you want the source code for the program, it's all located in "WFS Test Program - Source Code And Program\WFS_Test_Form.cs".
 If you just want the executable form of the program, it's located in "WFS Test Program - Source Code And Program\bin\Debug\WFS Test Program.exe".
 
+# Undoing Font Changes
+
+The function below will reset all font changes, by restoring each control's original font.
+It is **highly recommended** to run the "clearReplacementFonts" function after this function, to avoid unexpected font changes.
+```
+WinFormsFontSwapper.resetFontChanges();
+```
+
+# Clearing Replacement Fonts
+
+The function below will clear all replacement fonts from the WinForms Font Swapper library, but it will not change the fonts of any controls.
+It is **highly recommended** to run this function after the "undo font changes" function (see the "Undoing Font Changes" section),
+to avoid unexpected font changes.
+```
+WinFormsFontSwapper.clearReplacementFonts();
+```
+
+# Resetting Windows Font Swapper
+
+The function below will reset the Windows Font Swapper library to its starting state (that is, as if it had just been initialized).
+```
+WinFormsFontSwapper.resetWFSState();
+```
+
+# Getting a List of Original & Replacement Fonts
+
+There are 2 ways to get the original and replacement program fonts
+
+The first way is a read-only list of 2-item tuples. The first item is the original font, while the second item is the replacement font. The following function returns the list:
+```
+WinFormsFontSwapper.getProgramFontStyles();
+```
+
+The other way is to get a string representation of the original & replacement font list, returned from the following function"
+```
+WinFormsFontSwapper.getProgramFontStyleList();
+```
+
+The format is a numbered list of original fonts (next to the numbers) and replacement fonts (below the original fonts). Each entry is separated by a space. An example (from the test program) is listed below:
+```
+1. [Font: Name=Microsoft Sans Serif, Size=8.25, Units=3, GdiCharSet=0, GdiVerticalFont=False]
+[None]
+
+2. [Font: Name=Segoe UI, Size=9, Units=3, GdiCharSet=1, GdiVerticalFont=False]
+[None]
+
+3. [Font: Name=Microsoft Sans Serif, Size=20.25, Units=3, GdiCharSet=0, GdiVerticalFont=False]
+[None]
+
+4. [Font: Name=Calibri, Size=12, Units=3, GdiCharSet=0, GdiVerticalFont=False]
+[None]
+
+5. [Font: Name=Arial Narrow, Size=21.75, Units=3, GdiCharSet=0, GdiVerticalFont=False]
+[None]
+
+6. [Font: Name=Microsoft Sans Serif, Size=9.75, Units=3, GdiCharSet=0, GdiVerticalFont=False]
+[None]
+
+7. [Font: Name=Microsoft Sans Serif, Size=12, Units=3, GdiCharSet=0, GdiVerticalFont=False]
+[None]
+```
+
 # Notes
 
 1. If a replacement font is not specified for an original font, no changes will be made to the font and no errors will occur.

@@ -464,7 +464,7 @@ namespace WinForms_Font_Swapper
                 //         [Replacement font name, or "[None]" if no replacement font]
 
                 // original font
-                fontListString += programStyles.Keys.ElementAt(m).ToString() + Environment.NewLine;
+                fontListString += (m + 1).ToString() + ". " + programStyles.Keys.ElementAt(m).ToString() + Environment.NewLine;
 
                 // replacement font. If null, put "[None]" instead
                 if (programStyles[programStyles.Keys.ElementAt(m)] != null)

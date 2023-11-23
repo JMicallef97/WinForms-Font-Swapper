@@ -106,8 +106,6 @@ namespace WFS_Test_Program
             // undo font changes
             WinFormsFontSwapper.resetFontChanges();
             // clear replacement fonts
-            WinFormsFontSwapper.clearReplacementFonts();
-            this.Refresh();
         }
 
         #endregion
@@ -123,8 +121,6 @@ namespace WFS_Test_Program
             WinFormsFontSwapper.specifyUniversalFont(programFonts.Families[0]);
             // apply font changes
             WinFormsFontSwapper.applyFontChanges();
-            // refresh to apply changes
-            this.Refresh();
         }
 
         #endregion
@@ -143,8 +139,6 @@ namespace WFS_Test_Program
             WinFormsFontSwapper.specifyFontForSize(programFonts.Families[0], null, parsedFontSize);
             // apply font changes
             WinFormsFontSwapper.applyFontChanges();
-            // refresh to apply changes
-            this.Refresh();
         }
 
         #endregion
@@ -164,8 +158,6 @@ namespace WFS_Test_Program
             WinFormsFontSwapper.specifyFontForSizeRange(programFonts.Families[0], null, rangeMinimum, rangeMaximum);
             // apply font changes
             WinFormsFontSwapper.applyFontChanges();
-            // refresh to apply changes
-            this.Refresh();
         }
 
         #endregion
@@ -190,8 +182,6 @@ namespace WFS_Test_Program
             WinFormsFontSwapper.specifyFontForFontFamily(programFonts.Families[0], null, fontFamilyToReplace.Name);
             // apply font changes
             WinFormsFontSwapper.applyFontChanges();
-            // refresh to apply changes
-            this.Refresh();
         }
 
         private void pickFontFamilyBtn_Click(object sender, EventArgs e)
@@ -233,8 +223,6 @@ namespace WFS_Test_Program
             WinFormsFontSwapper.specifyFontForFont(testFont, fontToReplace.Name, fontToReplace.Size, fontToReplace.Style);
             // apply font changes
             WinFormsFontSwapper.applyFontChanges();
-            // refresh to apply changes
-            this.Refresh();
         }
 
         private void pickSpecificFontBtn_Click(object sender, EventArgs e)
