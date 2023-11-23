@@ -116,7 +116,6 @@ WinFormsFontSwapper.applyFontChanges();
 # Undoing Font Changes
 
 The function below will reset all font changes, by restoring each control's original font.
-It is **highly recommended** to run the "clearReplacementFonts" function after this function, to avoid unexpected font changes.
 ```
 WinFormsFontSwapper.resetFontChanges();
 ```
@@ -124,8 +123,6 @@ WinFormsFontSwapper.resetFontChanges();
 # Clearing Replacement Fonts
 
 The function below will clear all replacement fonts from the WinForms Font Swapper library, but it will not change the fonts of any controls.
-It is **highly recommended** to run this function after the "undo font changes" function (see the "Undoing Font Changes" section),
-to avoid unexpected font changes.
 ```
 WinFormsFontSwapper.clearReplacementFonts();
 ```
@@ -139,19 +136,19 @@ WinFormsFontSwapper.resetWFSState();
 
 # Getting a List of Original & Replacement Fonts
 
-There are 2 ways to get the original and replacement program fonts
+There are 2 ways to get the original and replacement program fonts.
 
 The first way is a read-only list of 2-item tuples. The first item is the original font, while the second item is the replacement font. The following function returns the list:
 ```
 WinFormsFontSwapper.getProgramFontStyles();
 ```
 
-The other way is to get a string representation of the original & replacement font list, returned from the following function"
+The other way is to get a string representation of the original & replacement font list, returned from the following function:
 ```
 WinFormsFontSwapper.getProgramFontStyleList();
 ```
 
-The format is a numbered list of original fonts (next to the numbers) and replacement fonts (below the original fonts). Each entry is separated by a space. An example (from the test program) is listed below:
+The format is a numbered list of original fonts (next to the numbers) and replacement fonts (below the original fonts) (or "[None]" if no replacement font is specified). Each entry is separated by a space. An example from the test program is listed below:
 ```
 1. [Font: Name=Microsoft Sans Serif, Size=8.25, Units=3, GdiCharSet=0, GdiVerticalFont=False]
 [None]
