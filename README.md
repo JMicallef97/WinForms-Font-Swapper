@@ -1,6 +1,5 @@
 # WinForms Font Swapper
  
-
 Tired of manually changing fonts all the time when trying to get the look of your windows form project right?
 Maybe at certain sizes the font you picked is unreadable, or maybe you can't or don't want to use default
 fonts. I've been there myself, that's why I wrote this library.
@@ -11,8 +10,6 @@ few lines of code. The DLL for the library is located in the "Releases" section 
 There's a windows form project in the folder called "WFS Test Program - Source Code and Program" that demonstrates the library features.
 If you want the source code for the program, it's all located in "WFS Test Program - Source Code And Program\WFS_Test_Form.cs".
 If you just want the executable form of the program, it's located in "WFS Test Program - Source Code And Program\bin\Debug\WFS Test Program.exe".
-
-Come on, push this to main
 
 # How to Use
 
