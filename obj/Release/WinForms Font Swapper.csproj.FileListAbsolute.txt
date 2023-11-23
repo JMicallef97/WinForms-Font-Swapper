@@ -2,3 +2,4 @@ C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\
 C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WinForms Font Swapper\bin\Release\WinForms Font Swapper.pdb
 C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WinForms Font Swapper\obj\Release\WinForms Font Swapper.dll
 C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WinForms Font Swapper\obj\Release\WinForms Font Swapper.pdb
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WinForms Font Swapper\obj\Release\WinForms Font Swapper.csprojResolveAssemblyReference.cache

@@ -293,7 +293,8 @@ namespace WinForms_Font_Swapper
 
             // declare local variables
             // -font object that represents the font to be replaced. programStyles dictionary will be searched for it
-            Font fontToReplace = new Font(nameOfFontToReplace, sizeOfFontToReplace, fontStyleToReplace);
+            Font fontToReplace = new Font(nameOfFontToReplace, sizeOfFontToReplace, fontStyleToReplace, GraphicsUnit.Point,
+                0, false);
 
             // check if replacement font exists in the programStyles dictionary
             if (programStyles.ContainsKey(fontToReplace))
@@ -665,11 +666,15 @@ namespace WinForms_Font_Swapper
         /// </summary>
         public static void clearReplacementFonts()
         {
-            // iterate through programStyles dictionary, setting all values to null
-            for (int m = 0; m < programStyles.Count; m++)
+            // ensure that programStyles is initialized before proceeding
+            if (programStyles != null)
             {
-                // set replacement font to null to clear it.
-                programStyles[programStyles.Keys.ElementAt(m)] = null;
+                // iterate through programStyles dictionary, setting all values to null
+                for (int m = 0; m < programStyles.Count; m++)
+                {
+                    // set replacement font to null to clear it.
+                    programStyles[programStyles.Keys.ElementAt(m)] = null;
+                }
             }
         }
 

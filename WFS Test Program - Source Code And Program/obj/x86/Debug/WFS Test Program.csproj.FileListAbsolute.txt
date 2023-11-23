@@ -1,0 +1,10 @@
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\bin\Debug\WFS Test Program.exe
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\bin\Debug\WFS Test Program.pdb
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\obj\x86\Debug\WFS_Test_Program.Properties.Resources.resources
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\obj\x86\Debug\WFS Test Program.csproj.GenerateResource.Cache
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\obj\x86\Debug\WFS Test Program.exe
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\obj\x86\Debug\WFS Test Program.pdb
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\bin\Debug\WinForms Font Swapper.dll
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\bin\Debug\WinForms Font Swapper.pdb
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\obj\x86\Debug\WFS Test Program.csprojResolveAssemblyReference.cache
+C:\Users\jmicallef1\documents\visual studio 2010\Projects\WinForms Font Swapper\WFS Test Program\obj\x86\Debug\WFS_Test_Program.WFS_Test_Form.resources

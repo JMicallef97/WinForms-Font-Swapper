@@ -96,7 +96,9 @@ that were scanned in step 1.
 WinFormsFontSwapper.applyFontChanges();
 ```
 
-There's a sample windows form project in the folder called "WFS Test Program" that demonstrates an example as well.
+There's a sample windows form project in the folder called "WFS Test Program - Source Code and Program" that demonstrates an example as well.
+If you want the source code for the program, it's all located in "WFS Test Program - Source Code And Program\WFS_Test_Form.cs".
+If you just want the executable form of the program, it's located in "WFS Test Program - Source Code And Program\bin\Debug\WFS Test Program.exe".
 
 # Notes
 
