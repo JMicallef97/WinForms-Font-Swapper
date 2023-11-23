@@ -112,5 +112,8 @@ to the Main() function in Program.cs.
 
 # Version & Dependency Information
 
-I created this with Visual Studio C# 2010, using .Net Framework 4, on November 22 2023. This library does not use any 
-external dependencies.
+I created this with Visual Studio C# 2010, using .Net Framework 4, on November 22 2023. This library does not use any external dependencies.
+
+# Licensing
+
+Both the library and test program are licensed under the MIT license. The replacement font used in the test program is called "ShareTechMono_Regular", and a copy of its license (the SIL open font license) is located at "WFS Test Program - Source Code And Program\Licenses\". If you use this library in a project I'd love to hear about it!
