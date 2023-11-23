@@ -92,6 +92,20 @@ WinFormsFontSwapper.specifyFontForFontFamily(
 
 ```
 
+**REPLACE BY FONT**
+```
+// -Replace fonts that match the name, size and style
+//  specified in the 2nd, 3rd, and 4th parameters with the
+//  Font object specified in the 1st parameter.
+
+WinFormsFontSwapper.specifyFontForFont(
+	[Replacement font, as font object],
+	[name of the font you want to replace],
+	[size of the font you want to replace],
+	[style of the font you want to replace]);
+
+```
+
 3. Finally, called the function WinFormsFontSwapper.applyFontChanges() to apply the replacement fonts to all forms
 that were scanned in step 1.
 
