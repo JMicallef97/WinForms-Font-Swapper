@@ -106,7 +106,7 @@ WinFormsFontSwapper.specifyFontForFont(
 
 ```
 
-3. Finally, called the function WinFormsFontSwapper.applyFontChanges() to apply the replacement fonts to all forms
+3. Finally, call the function WinFormsFontSwapper.applyFontChanges() to apply the replacement fonts to all forms
 that were scanned in step 1.
 
 ```
