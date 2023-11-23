@@ -198,6 +198,9 @@ Application.SetCompatibleTextRenderingDefault(true);
 ```
 to the Main() function in Program.cs.
 
+3. Set the AutoScaleMode property of all forms that have fonts swapped to any setting besides "Font". If you don't do this, your controls will change in size
+   when you swap fonts.
+
 # Version & Dependency Information
 
 I created this with Visual Studio C# 2010, using .Net Framework 4, on November 22 2023. This library does not use any external dependencies.
