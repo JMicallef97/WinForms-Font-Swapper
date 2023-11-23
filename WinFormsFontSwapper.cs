@@ -84,7 +84,9 @@ namespace WinForms_Font_Swapper
         /// NOTE: At least 1 form must be scanned before this function can be run, or an exception will be thrown.
         /// </summary>
         /// <param name="newFontFamily">The family of the new font.</param>
-        public static void specifyUniversalFont(FontFamily newFontFamily)
+        /// <param name="newFontScalingFactor">The amount to scale the new font's size, compared to the original font size. By default it is 1.0 (no change in size). Values greater than 1.0f increase
+        /// new font size, while values that are less than 1.0f decrease new font size. </param>
+        public static void specifyUniversalFont(FontFamily newFontFamily, float newFontScalingFactor = 1.0f)
         {
             // ensure that programStyles dictionary is initialized
             if (programStyles == null)
@@ -100,7 +102,7 @@ namespace WinForms_Font_Swapper
                 // the newFontFamily.
                 programStyles[programStyles.Keys.ElementAt(m)] =
                     new Font(newFontFamily,
-                        programStyles.Keys.ElementAt(m).SizeInPoints,
+                        programStyles.Keys.ElementAt(m).SizeInPoints * newFontScalingFactor,
                         programStyles.Keys.ElementAt(m).Style);
             }
         }

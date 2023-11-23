@@ -25,11 +25,16 @@ replace fonts by size, replace fonts by size range, replace fonts by name, or re
 ```
 // Specify a universal font (replace all fonts with this font).
 
+// You can specify a scaling (multiplier) factor for the new fonts, by default it is set to 1.0. Values
+// larger than 1.0 result in replacement fonts being larger than original fonts, while values less than
+// 1.0 result in replacement fonts being smaller than original fonts.
+
 // Original fonts will be replaced with a font that is the original 
 // size and style, but from the font family you specify in the parameter.
 
 WinFormsFontSwapper.specifyUniversalFont(
-	[family of the font you want to replace]);
+	[family of the font you want to replace],
+	[scaling factor for new font]);
 
 ```
 
