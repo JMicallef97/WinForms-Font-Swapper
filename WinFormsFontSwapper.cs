@@ -41,12 +41,11 @@ namespace WinForms_Font_Swapper
         // NOTE:
         // ***Custom fonts WILL NOT render unless you add Application.SetCompatibleTextRenderingDefault(true); to the
         // Main function in Program.cs.***
-        // -Source: https://stackoverflow.com/a/36509042
 
         // delegates
         /// <summary>
         /// Represents a method that is used to perform some action on a control that is enumerated
-        /// when scanning a form's control tree (in the function 
+        /// when scanning a form's control tree (in the function enumerateFormControlTree)
         /// </summary>
         /// <param name="enumeratedControl">The control that was last enumerated from the form's control tree.</param>
         /// <param name="formControlStack">The stack containing controls enumerated from the form's control tree.</param>
@@ -82,7 +81,7 @@ namespace WinForms_Font_Swapper
         /// Specifies a font to be swapped with all original fonts in the forms, regardless of
         /// the name, size, or style of an original font. The original fonts will be replaced with
         /// a font of the original size and style but with the characters from the newFontFamily parameter.
-        /// NOTE: At least 1 form must be scanned before this function can be run.
+        /// NOTE: At least 1 form must be scanned before this function can be run, or an exception will be thrown.
         /// </summary>
         /// <param name="newFontFamily">The family of the new font.</param>
         public static void specifyUniversalFont(FontFamily newFontFamily)
@@ -109,7 +108,7 @@ namespace WinForms_Font_Swapper
         /// <summary>
         /// Specifies a font to be swapped with original fonts whose Size property matches sizeToReplace. The replacement 
         /// fonts are generated from newFontFamily with the style specified in newFontStyle (if it is not set to null). 
-        /// NOTE: At least 1 form must be scanned before this function can be run.
+        /// NOTE: At least 1 form must be scanned before this function can be run, or an exception will be thrown.
         /// </summary>
         /// <param name="newFontFamily">The family of the new font.</param>
         /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
@@ -136,7 +135,7 @@ namespace WinForms_Font_Swapper
                         // the style specified in newFontStyle
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Size,
                                 newFontStyle.Value);
                     }
                     else
@@ -145,7 +144,7 @@ namespace WinForms_Font_Swapper
                         // font size and style
                         programStyles[programStyles.Keys.ElementAt(m)] =
                             new Font(newFontFamily,
-                                programStyles.Keys.ElementAt(m).SizeInPoints,
+                                programStyles.Keys.ElementAt(m).Size,
                                 programStyles.Keys.ElementAt(m).Style);
                     }
                 }
@@ -155,7 +154,8 @@ namespace WinForms_Font_Swapper
         /// <summary>
         /// Specifies a font to be swapped with original fonts whose Size property is between minSizeToReplace and 
         /// maxSizeToReplace, inclusive. The replacement fonts are generated from newFontFamily with the style specified 
-        /// in newFontStyle (if it is not set to null). NOTE: At least 1 form must be scanned before this function can be run.
+        /// in newFontStyle (if it is not set to null). NOTE: At least 1 form must be scanned before this function can 
+        /// be run, or an exception will be thrown.
         /// </summary>
         /// <param name="newFontFamily">The family of the new font.</param>
         /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
@@ -205,11 +205,12 @@ namespace WinForms_Font_Swapper
         /// Specifies a font to be swapped with all original fonts whose name matches the parameter fontNameToReplace, regardless of
         /// the name, size, or style of an original font. The original fonts will be replaced with a font of the original size and 
         /// style (if newFontStyle is not set to null) but with the characters from the newFontFamily parameter.
-        /// NOTE: At least 1 form must be scanned before this function can be run.
+        /// NOTE: At least 1 form must be scanned before this function can be run, or an exception will be thrown.
         /// </summary>
         /// <param name="newFontFamily">The family of the new font.</param>
         /// <param name="newFontStyle">The style of the replacement font. If you want to keep the original font style, set this to null.</param>
-        /// <param name="fontNameToReplace">Original fonts with the name specified in this parameter will be replaced.</param>
+        /// <param name="fontNameToReplace">Original fonts with the name specified in this parameter will be replaced. If this is blank or null,
+        /// an exception will be thrown.</param>
         public static void specifyFontForFontFamily(FontFamily newFontFamily, FontStyle? newFontStyle, string fontNameToReplace)
         {
             // ensure that programStyles dictionary is initialized
@@ -251,6 +252,54 @@ namespace WinForms_Font_Swapper
                                 programStyles.Keys.ElementAt(m).Style);
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Specifies a font to be swapped with a specific font (defined by a font name, size, and font style in the last 3 parameters). 
+        /// The original fonts will be replaced with the font specified in replacementFont. If the font specified by the 3 parameters doesn't
+        /// exist among the scanned fonts, then nothing will happen.
+        /// NOTE: At least 1 form must be scanned before this function can be run, or an exception will be thrown.
+        /// </summary>
+        /// <param name="replacementFont">The font to replace the original font with..</param>
+        /// <param name="nameOfFontToReplace">The name of the font to be replaced.</param>
+        /// <param name="fontStyleToReplace">The style of the font to be replaced</param>
+        /// <param name="sizeOfFontToReplace">The size of the font to be replaced.</param>
+        public static void specifyFontForFont(Font replacementFont, 
+            string nameOfFontToReplace, float sizeOfFontToReplace, FontStyle fontStyleToReplace)
+        {
+            #region ERROR CHECKING
+
+            // ensure that programStyles dictionary is initialized
+            if (programStyles == null)
+            {
+                // throw exception since can't proceed
+                throw new Exception("No fonts available to replace! Ensure that all forms were scanned through scanFormForFonts() before calling this function.");
+            }
+
+            // ensure name of font to replace isn't null or blank
+            if (nameOfFontToReplace == null || nameOfFontToReplace == "")
+            {
+                throw new Exception("No font name specified for font to replace, cannot proceed.");
+            }
+
+            // ensure replacement font isn't null
+            if (replacementFont == null)
+            {
+                throw new Exception("Replacement font is null, cannot proceed.");
+            }
+
+            #endregion
+
+            // declare local variables
+            // -font object that represents the font to be replaced. programStyles dictionary will be searched for it
+            Font fontToReplace = new Font(nameOfFontToReplace, sizeOfFontToReplace, fontStyleToReplace);
+
+            // check if replacement font exists in the programStyles dictionary
+            if (programStyles.ContainsKey(fontToReplace))
+            {
+                // specify replacement font from parameter
+                programStyles[fontToReplace] = replacementFont;
             }
         }
 
@@ -310,6 +359,39 @@ namespace WinForms_Font_Swapper
             }
         }
 
+        /// <summary>
+        /// Gets the font of enumeratedControl and searches in the programStyles dictionary for it (in the dictionary values). If it
+        /// finds the control's font as a value, it replaces the font in enumeratedControl with the original font (the key of the
+        /// entry). If the replacement font is null, or the control hasn't been previously scanned (its font isn't in the programStyles 
+        /// dictionary as a key), no change occurs.
+        /// </summary>
+        /// <param name="enumeratedControl">The control that was last enumerated from the form's control tree.</param>
+        /// <param name="formControlStack">The stack containing controls enumerated from the form's control tree.</param>
+        private static void resetControlFont(Control enumeratedControl, ref Stack<Control> formControlStack)
+        {
+            // ensure that program styles is not null
+            if (programStyles == null)
+            {
+                return;
+            }
+
+            // search dictionary values for replacement font
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // check if value of current dictionary entry is equal to
+                // the enumerated control's current font
+                if (programStyles[programStyles.Keys.ElementAt(m)] ==
+                    enumeratedControl.Font)
+                {
+                    // reset font change by setting enumeratedControl's font to the original font
+                    // (the key of the matching entry)
+                    enumeratedControl.Font = programStyles.Keys.ElementAt(m);
+                    // end loop by breaking, since no need to keep searching
+                    break;
+                }
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -356,7 +438,60 @@ namespace WinForms_Font_Swapper
         }
 
         /// <summary>
-        /// Checks the form (passed in as the parameter formToScan) and all of its controls for different font styles. If new
+        /// Returns a list of font styles (and their replacements) as a string. If no forms have been scanned (no fonts
+        /// to replace) then the function will return a blank string ("").
+        /// </summary>
+        /// <returns>A string containing a list of original font styles, and replacement fonts (if they were set).</returns>
+        public static string getProgramFontStyleList()
+        {
+            // error checks (ensure that programStyles dictionary is not null)
+            if (programStyles == null)
+            {
+                // return a blank string since there are no fonts to replace
+                return "";
+            }
+
+            // declare local variables
+            // -stores list output string
+            string fontListString = "";
+
+            // add each font to fontListString
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // format is:
+                // "(m+1). [Original Font Name]
+                //         [Replacement font name, or "[None]" if no replacement font]
+
+                // original font
+                fontListString += programStyles.Keys.ElementAt(m).ToString() + Environment.NewLine;
+
+                // replacement font. If null, put "[None]" instead
+                if (programStyles[programStyles.Keys.ElementAt(m)] != null)
+                {
+                    // print the replacement font
+                    fontListString += programStyles[programStyles.Keys.ElementAt(m)].ToString();
+                }
+                else
+                {
+                    // put "[None]" to signify no replacement font.
+                    fontListString += "[None]";
+                }
+
+                // add 2 blank lines for spacing, unless entry is last
+                if (m < programStyles.Count - 1)
+                {
+                    // add 2 blank lines for spacing
+                    fontListString += Environment.NewLine + Environment.NewLine;
+                }
+                // otherwise entry is last, no need to add blank lines.
+            }
+
+            // return font list string
+            return fontListString;
+        }
+
+        /// <summary>
+        /// Checks the form (passed in as the parameter formToScan) and all of its controls for different font styles. If the
         /// ones are found, they are added to an internal dictionary of font styles.
         /// </summary>
         /// <param name="formToScan">The form to scan for fonts.</param>
@@ -486,6 +621,68 @@ namespace WinForms_Font_Swapper
                     enumerateFormControlTree(programForms[m], updateControlFont);
                 }
             }
+        }
+
+        /// <summary>
+        /// Reverses the font changes, by looking for replacement fonts and swapping them with the original fonts that
+        /// they replaced.
+        /// </summary>
+        public static void resetFontChanges()
+        {
+            // check for errors (ensure that list of forms is not null)
+            #region ERROR CHECKS
+
+            // check if program forms list is null
+            if (programForms == null)
+            {
+                // return false since form list hasn't been initialized
+                throw new Exception("No forms were scanned for font changes; cannot run function.");
+            }
+
+            #endregion
+
+            // iterate through all forms, applying changes to all controls
+            for (int m = programForms.Count - 1; m >= 0; m--)
+            {
+                //  check if form is null (for example, original item disposed of)
+                if (programForms[m] == null)
+                {
+                    // remove form from list (since it is null)
+                    programForms.RemoveAt(m);
+                }
+                else
+                {
+                    // iterate through controls in form and update their font to match the fonts
+                    // specified by developer
+                    enumerateFormControlTree(programForms[m], resetControlFont);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Clears all replacement fonts by setting the replacement fonts for all original fonts to null.
+        /// If no fonts are scanned this function does nothing.
+        /// </summary>
+        public static void clearReplacementFonts()
+        {
+            // iterate through programStyles dictionary, setting all values to null
+            for (int m = 0; m < programStyles.Count; m++)
+            {
+                // set replacement font to null to clear it.
+                programStyles[programStyles.Keys.ElementAt(m)] = null;
+            }
+        }
+
+        /// <summary>
+        /// Resets the state of the WinForms Font Swapper by setting the state of all library variables
+        /// to their starting values (null).
+        /// </summary>
+        public static void resetWFSState()
+        {
+            // initialize/reset library variables to their default starting values (null)
+            programStyles = null;
+            programForms = null;
+            programStylesExportList = null;
         }
 
         /// <summary>
